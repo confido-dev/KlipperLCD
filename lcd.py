@@ -8,6 +8,7 @@ import lib_col_pic
 
 import atexit
 import serial
+import cyrtranslit
 
 FHONE = 0x5a
 FHTWO = 0xa5
@@ -214,6 +215,7 @@ class LCD:
     def write(self, data, eol=True, lf=False):
         dat = bytearray()
         if type(data) == str:
+            data = cyrtranslit.to_latin(data, "ru")
             dat.extend(map(ord, data))
         else:
             dat.extend(data)
